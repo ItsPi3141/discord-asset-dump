@@ -6,6 +6,7 @@ const fs = require("node:fs");
 	if (!fs.existsSync("./assets/")) fs.mkdirSync("./assets/");
 	const chunkFiles = fs.readdirSync("./js/");
 	console.log(`Found ${chalk.blue(chunkFiles.length)} files`);
+	const startTime = Date.now();
 	for (const file of chunkFiles) {
 		try {
 			console.log(`Reading ${chalk.blue(file)}`);
@@ -25,4 +26,6 @@ const fs = require("node:fs");
 			console.log(`Error reading ${chalk.red(file)}`);
 		}
 	}
+	const downloaded = fs.readdirSync("./assets/");
+	console.log(chalk.blue(`Downloaded ${downloaded.length} assets in ${Math.round((Date.now() - startTime) / 1000)}s`));
 })();
